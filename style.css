@@ -1,0 +1,139 @@
+
+/* =====================================
+   CULACCINO — ESTILOS
+   ===================================== */
+
+/* Los elementos desaparecen de golpe,
+   pero mantienen su espacio original. */
+
+.culaccino-desaparecido {
+  visibility: visible !important;
+  opacity: 1 !important;
+  background: #ffffff !important;
+  border-color: transparent !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+  pointer-events: none !important;
+  transition: none !important;
+}
+
+.culaccino-elemento-oculto,
+.culaccino-elemento-oculto * {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.culaccino-hueco-blanco {
+  background: #ffffff !important;
+  border-color: transparent !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  border-image: none !important;
+}
+
+/* Instagram can draw media frames with pseudo-elements. */
+.culaccino-hueco-blanco::before,
+.culaccino-hueco-blanco::after,
+.culaccino-desaparecido::before,
+.culaccino-desaparecido::after {
+  visibility: hidden !important;
+}
+
+article img,
+article video {
+  border: none !important;
+}
+
+/* Hide video only after its ASCII replacement has been rendered. */
+html.culaccino-ascii-mode video[data-culaccino-ascii-ready] {
+  visibility: hidden !important;
+}
+
+/* Los textos no se desplazan
+   mediante márgenes ni posiciones. */
+
+article p,
+article span,
+article a,
+article li,
+article time,
+article h1,
+article h2,
+article h3 {
+  transform-origin: center center;
+  transition: none;
+}
+
+/* Broken display: RGB channel separation and randomly placed signal loss. */
+html.culaccino-glitch {
+  animation: culaccino-pantalla-rota 420ms steps(1, end) infinite !important;
+}
+
+.culaccino-glitch-capa {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2147483647 !important;
+  pointer-events: none !important;
+  overflow: hidden;
+  border-radius: 0 !important;
+  background: repeating-linear-gradient(0deg, transparent 0 2px, #00000028 2px 3px);
+}
+
+.culaccino-glitch-capa::before,
+.culaccino-glitch-capa::after {
+  content: "";
+  position: absolute;
+  inset: -24px;
+  background:
+    repeating-linear-gradient(90deg, #ff0000b3 0 1px, #00ff0099 1px 2px,
+      #0000ffb3 2px 3px, transparent 3px 5px, #fff9 5px 6px, #111a 6px 9px, transparent 9px 13px),
+    repeating-linear-gradient(0deg, #fff5 0 1px, transparent 1px 3px, #0006 3px 4px);
+  clip-path: var(--rotura);
+  animation: culaccino-senal-rota 380ms steps(1, end) infinite;
+}
+
+.culaccino-glitch-capa::after {
+  background: repeating-linear-gradient(90deg, #ff0000b3 0 3px, #00ff00b3 3px 5px, #0000ffb3 5px 7px, transparent 7px 11px);
+  clip-path: var(--bandas);
+  animation-delay: -170ms;
+  opacity: 0.9;
+}
+
+.culaccino-pixeles-muertos {
+  position: absolute;
+  background: #030305;
+  border-left: 3px solid #ff003c;
+  border-right: 2px solid #00ff80;
+  clip-path: polygon(8% 0, 91% 0, 91% 12%, 100% 12%, 94% 55%,
+    100% 72%, 86% 100%, 12% 95%, 12% 81%, 0 81%, 6% 30%, 0 14%);
+}
+
+.culaccino-grietas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.75;
+  filter: drop-shadow(2px 1px 0 #000) drop-shadow(-1px 0 0 #ff003c);
+}
+
+@keyframes culaccino-pantalla-rota {
+  0%, 100% { filter: url("#culaccino-pantalla-rota") contrast(1.08); }
+  35% { filter: url("#culaccino-pantalla-rota") contrast(1.22); }
+  70% { filter: url("#culaccino-pantalla-rota") contrast(1.04); }
+}
+
+@keyframes culaccino-senal-rota {
+  0%, 100% { transform: translateX(0); background-position: 0 0; }
+  30% { transform: translateX(var(--salto)); background-position: 17px -31px; }
+  65% { transform: translateX(calc(var(--salto) * -1)); background-position: -23px 19px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.culaccino-glitch { animation: none !important; }
+  .culaccino-glitch-capa::before,
+  .culaccino-glitch-capa::after { animation: none; }
+}

@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "UN-BREAK",
+  "version": "0.2.0",
+  "description": "Intervención gráfica experimental sobre la navegación digital.",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.instagram.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "style.css"
+      ]
+    }
+  ],
+  "minimum_chrome_version": "102",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://*.cdninstagram.com/*",
+    "https://*.fbcdn.net/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
